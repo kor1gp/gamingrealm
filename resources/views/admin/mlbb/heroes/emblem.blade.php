@@ -2,9 +2,10 @@
 
 @section('content')
 <div class="container-fluid pb-3 ">
-    <div class="row mt-3">
+    <div class="row mt-3 align-middle h-25 align-middle">
         <h1 class="mt-4 ">Emblems for {{$hero->name}}</h1>
         <img class="ml-3" src="{{$hero->icon}}" width="100" height="100"/>
+        <div id="btn-save-data"  class=" w-25 h-25 btn btn-primary mt-4 ml-5" data-hero-id="{{$hero->id}}">Save Data</div>
     </div>
 
     <div class="row ">
@@ -17,7 +18,7 @@
                 <div class="mb-3 mt-3 pl-3">
                     <div class="row ">
                         <label >Filter by Role:</label>
-                        <select name="emblem{{$i}}_id" id="emblem_id" class="form-select p-2 ml-2 emblem_id" data-id="{{$i}}">
+                        <select name="emblem{{$i}}_id" id="emblem_id" class="form-select p-2 ml-2 select_emblem{{$i}}_id emblem_id" data-id="{{$i}}">
                             <option value="">Select Emblem</option>
                             @foreach($emblemTypes as $emblemType)
                                 <option value="{{ $emblemType->id }}" >{{ $emblemType->name }}</option>
@@ -42,7 +43,7 @@
 
     </div>
 
-    <div id="btn-save-data"  class="btn btn-primary mt-3 " data-hero-id="{{$hero->id}}">Save Data</div>
+    
     
 
 </div>
@@ -73,7 +74,7 @@
                     },
                     dataType: 'json',
                     success: function(response) {
-                        
+                        console.log(response);
                         let html = '<div class="row mt-2 ">';
                         let i = 0
                         $('#emblem'+id+'-first-row').html("");
@@ -111,50 +112,19 @@
             });
 
 
-            // $('.btn-preview-emblem').on('click', function() {
-            //     let id = $(this).data('id');
-            //     if(firstRowHtml == ""){
-            //         alert("Please select the first row");
-            //         return;
-            //     }
-            //     if(secondRowHtml == ""){
-            //         alert("Please select the second row");
-            //         return;
-            //     }
-            //     if(thirdRowHtml == ""){
-            //         alert("Please select the third row");
-            //         return;
-            //     }
-            //     $('#selected-emblem'+id).html("");
-            //     $('#selected-emblem'+id).append(firstRowHtml);
-            //     $('#selected-emblem'+id).append(secondRowHtml);
-            //     $('#selected-emblem'+id).append(thirdRowHtml);
-
-            
-            // });
-
             $('#btn-save-data').on('click', function() {
-                // console.log(emblems);
-                // return;
-                // alert(emblems.length);
-                //     return;
+                
                 if(emblems.length <=0){
                     alert("Please add emblem");
                     return;
                 }
                 let heroId = $(this).data('hero-id');
                 storeOrUpdateEmblem(heroId);
-                // if(isUpdateEmblem){
-                //     updateEmblem(heroId);
-                // }
-                // else{
-                //     storeEmblem(heroId);
-                // }
-                
+               
             });
 
             function storeOrUpdateEmblem(heroId){
-                let url = isUpdateEmblem ? "/admin/mlbb/heroes/" + heroId + "/emblem-build-update" : "/admin/mlbb/heroes/" + heroId + "/emblem-build";
+                let url = isUpdateEmblem ? "/admin/mlbb/heroes/" + heroId + "/emblem-update" : "/admin/mlbb/heroes/" + heroId + "/emblem";
   
                 $.ajax({
                     url: url,
@@ -172,38 +142,24 @@
                 });
             }
 
-            // function updateEmblem(heroId){
-            //     $.ajax({
-            //         url: "/admin/mlbb/heroes/"+heroId+"/emblem-build-update",
-            //         type: "POST",   
-            //         data: {
-            //             "_token": "{{ csrf_token() }}",
-            //             "emblems": emblems,
-            //             "emblem_type_id" : emblem_type_id
-            //         },
-            //         dataType: 'json',
-            //         success: function(response) {
-            //             window.location.href = "{{url('/admin/mlbb/heroes')}}";
-            //         }
-            //     });
-            // }
-
-
-
+            
             /// Rendering data on load
             const allHeroEmblems = @json($heroEmblems);
             const allEmblems = @json($emblems);
+            const emblemTypes = @json($emblemTypes);
             if(allHeroEmblems.length > 0){
                 isUpdateEmblem = true;
             }
             for (let k = 0; k < allHeroEmblems.length; k++) {
                 const heroEmblem = allHeroEmblems[k];
                 emblemArray = JSON.parse(heroEmblem.emblems);
-                console.log(emblemArray[0].id);
                 emblem_type_ids[k] = heroEmblem.emblem_type_id;
-                // console.log(emblem_type_ids[k]+"123");
                 emblems[k] = emblemArray;
                 let id = k+1;
+
+                console.log(emblem_type_ids[k]);
+                $('.select_emblem'+id+'_id').val(emblem_type_ids[k]);
+                
                 $.ajax({
                     url: '{{ route('api.get-emblems') }}',
                     data: {
@@ -272,56 +228,6 @@
 
 
 
-
-
-
-
-                // for (let i = 0; i < allEmblems.length; i++) {
-                    
-                //     let html = '<div class="row mt-2 ">';
-                //     let emblem = allEmblems[i];
-                //     html = `
-                        
-                //             <div class=" card mt-2 ml-2 emblem${id}-container emblem${id}-${emblem.id}">
-                //                 <img src="${emblem.icon}" class="card-img-top mt-2" alt="${emblem.name}" style="width: 64px; height: 64px;">
-                //                 <div class="card-body">
-                //                     <p class="card-title ellipsis-2">${emblem.name}</p>
-                //                     <button id="select-emblem" type="button" class="btn btn-primary select-emblem p-1" data-id="${id}" data-index="${i}" data-emblem-id="${emblem.id}" data-emblem-name="${emblem.name}" data-emblem-icon="${emblem.icon}">Select</button>
-                //                 </div>
-                //             </div>`;
-
-
-                //     if(i < 3){
-                //         $('#emblem'+id+'-first-row').append(html);
-                //         // $('#emblem'+id+'-first-row .emblem'+id+'-container').removeClass("strong-against-card");
-                //         emblemArray.forEach((saveEmblem) => {
-                //             if(emblem.id == saveEmblem.id){
-                //                 $('#emblem'+id+'-first-row .emblem'+id+'-'+emblem.id).addClass("strong-against-card");
-                //             }
-                            
-                //         });
-                        
-                //     }
-                //     else if(i < 6){
-                //         $('#emblem'+id+'-second-row').append(html);
-                //         emblemArray.forEach((saveEmblem) => {
-                //             if(emblem.id == saveEmblem.id){
-                //                 $('#emblem'+id+'-second-row .emblem'+id+'-'+emblem.id).addClass("strong-against-card");
-                //             }
-                            
-                //         });
-                //     }
-                //     else{
-                //         $('#emblem'+id+'-third-row').append(html);
-                //         emblemArray.forEach((saveEmblem) => {
-                //             if(emblem.id == saveEmblem.id){
-                //                 $('#emblem'+id+'-third-row .emblem'+id+'-'+emblem.id).addClass("strong-against-card");
-                //             }
-                            
-                //         });
-                //     }
-                        
-                // };
             }
 
 
@@ -404,6 +310,7 @@
                 // emblems[id-1] = emblemArray;
                 
             });
+            
             
         });
         

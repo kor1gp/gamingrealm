@@ -73,7 +73,6 @@ class HeroAdditionalDataController extends Controller
         $hero->weaknesses()->sync($weakHeroIds);
         $hero->strengths()->sync($strongHeroIds);
         $hero->itemCounters()->sync($itemCounterIds);
-        $hero->emblems()->sync($emblemIds);
 
         return redirect()->route('admin.mlbb.heroes.index')->with('success', 'Hero weaknesses saved successfully.');
 

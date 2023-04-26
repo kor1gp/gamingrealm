@@ -15,10 +15,10 @@ class EmblemController extends Controller
         $selectedType = $request->input('emblem_type_id');
         if ($selectedType) {
             
-            $emblems = Emblem::where('emblem_type_id', $selectedType)->paginate(10);
+            $emblems = Emblem::where('emblem_type_id', $selectedType)->orderBy('id','desc')->paginate(10);
         }
         else{
-            $emblems = Emblem::paginate(10);
+            $emblems = Emblem::orderBy('id','desc')->paginate(10);
         }
 
         

@@ -37,9 +37,9 @@ class Hero extends Model
     {
         return $this->belongsToMany(Emblem::class, 'hero_emblems');
     }
-    public function itemBuilds()
+    public function builds()
     {
-        return $this->hasMany(ItemBuild::class);
+        return $this->hasMany(HeroItemBuild::class);
     }
 
     public function weaknesses()

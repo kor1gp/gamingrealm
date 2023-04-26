@@ -56,9 +56,15 @@ Route::prefix('admin/mlbb')->name('admin.mlbb.')->group(function () {
     Route::get('heroes/{id}/additional-data', [App\Http\Controllers\Admin\MLBB\HeroAdditionalDataController::class, 'index'])->name('heroes.additional-data'); 
     Route::post('heroes/{id}/additional-data.store', [App\Http\Controllers\Admin\MLBB\HeroAdditionalDataController::class, 'store'])->name('heroes.additional-data.store'); 
     Route::post('heroes/{id}/additional-data.edit', [App\Http\Controllers\Admin\MLBB\HeroAdditionalDataController::class, 'edit'])->name('heroes.additional-data.edit'); 
-    Route::get('heroes/{id}/emblem-build', [App\Http\Controllers\Admin\MLBB\HeroEmblemBuildController::class, 'index'])->name('heroes.emblem-build'); 
-    Route::post('heroes/{id}/emblem-build', [App\Http\Controllers\Admin\MLBB\HeroEmblemBuildController::class, 'store'])->name('heroes.emblem-build.store'); 
-    Route::post('heroes/{id}/emblem-build-update', [App\Http\Controllers\Admin\MLBB\HeroEmblemBuildController::class, 'update'])->name('heroes.emblem-build.update'); });
+    Route::get('heroes/{id}/emblem', [App\Http\Controllers\Admin\MLBB\HeroEmblemController::class, 'index'])->name('heroes.emblem'); 
+    Route::post('heroes/{id}/emblem', [App\Http\Controllers\Admin\MLBB\HeroEmblemController::class, 'store'])->name('heroes.emblem.store'); 
+    Route::post('heroes/{id}/emblem-update', [App\Http\Controllers\Admin\MLBB\HeroEmblemController::class, 'update'])->name('heroes.emblem.update');
+
+    Route::get('heroes/{id}/build', [App\Http\Controllers\Admin\MLBB\HeroBuildController::class, 'index'])->name('heroes.build'); 
+    Route::post('heroes/{id}/build', [App\Http\Controllers\Admin\MLBB\HeroBuildController::class, 'store'])->name('heroes.build.store'); 
+    Route::post('heroes/{id}/build-update', [App\Http\Controllers\Admin\MLBB\HeroBuildController::class, 'update'])->name('heroes.build.update');
+    Route::get('heroes/{id}/detail', [App\Http\Controllers\Admin\MLBB\HeroDetailController::class, 'index'])->name('heroes.detail'); 
+});
 
 Route::prefix('admin/mlbb/hero')->name('admin.mlbb.hero.')->group(function () {
     // Route::resource('item-counters', App\Http\Controllers\Admin\MLBB\HeroItemCounterController::class);

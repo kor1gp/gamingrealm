@@ -55,9 +55,9 @@
                                         {{-- Add action buttons for edit and delete here --}}
                                         <a href="{{ route('admin.mlbb.heroes.edit', $hero->id) }}" class="btn btn-sm btn-warning mt-2">Edit</a> 
                                         <a href="{{ route('admin.mlbb.heroes.additional-data', $hero->id) }}" class="btn btn-sm btn-warning mt-2">Additional Data</a> 
-                                        <a href="{{ route('admin.mlbb.heroes.emblem-build', $hero->id) }}" class="btn btn-sm btn-warning mt-2">Emblem & Build</a> 
-                                    
-
+                                        <a href="{{ route('admin.mlbb.heroes.emblem', $hero->id) }}" class="btn btn-sm btn-warning mt-2">Emblem</a> 
+                                        <a href="{{ route('admin.mlbb.heroes.build', $hero->id) }}" class="btn btn-sm btn-warning mt-2">Build</a> 
+                                        <a href="{{ route('admin.mlbb.heroes.detail', $hero->id) }}" class="btn btn-sm btn-warning mt-2">View</a> 
                                     </td>
                                 </tr>
                             @endforeach
