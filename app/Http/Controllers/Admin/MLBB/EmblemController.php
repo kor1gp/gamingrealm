@@ -54,7 +54,7 @@ class EmblemController extends Controller
 
         $icon = $request->file('icon');
         $icon_name = time() . '_' . $icon->getClientOriginalName();
-        $icon_path = $icon->storeAs('public/emblems', $icon_name);
+        $icon_path = $icon->storeAs('public/mlbb/emblems', $icon_name);
         $icon_url = Storage::url($icon_path);
 
           
