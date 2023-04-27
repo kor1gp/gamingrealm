@@ -98,6 +98,9 @@
                         <li class="nav-item">
                             <a class="nav-link{{ Route::is('admin.mlbb.emblems.*') ? ' active' : '' }}" href="{{ route('admin.mlbb.emblems.index') }}">Emblems</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link{{ Route::is('admin.mlbb.emblems.*') ? ' active' : '' }}" href="{{ route('logout') }}">Logout</a>
+                        </li>
                         
                     </ul>
                 </div>
