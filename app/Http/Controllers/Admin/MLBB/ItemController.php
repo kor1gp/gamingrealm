@@ -52,7 +52,7 @@ class ItemController extends Controller
 
         $icon = $request->file('icon');
         $icon_name = time() . '_' . $icon->getClientOriginalName();
-        $icon_path = $icon->storeAs('public/items', $icon_name);
+        $icon_path = $icon->storeAs('public/mlbb/items', $icon_name);
         $icon_url = Storage::url($icon_path);
 
           
