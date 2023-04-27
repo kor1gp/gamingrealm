@@ -44,13 +44,13 @@ Route::prefix('admin')->middleware(['auth', 'admin'])->group(function () {
 
 
 // MLBB admin routes
-Route::prefix('admin/mlbb')->group(function () {
+Route::prefix('admin/mlbb')->middleware(['auth', 'admin'])->group(function () {
     Route::get('dashboard', [AdminMLBBController::class, 'dashboard'])->name('admin.mlbb.dashboard');    
 });
 
 
 
-Route::prefix('admin/mlbb')->name('admin.mlbb.')->group(function () {
+Route::prefix('admin/mlbb')->middleware(['auth', 'admin'])->name('admin.mlbb.')->group(function () {
     Route::resource('heroes', App\Http\Controllers\Admin\MLBB\HeroController::class);
     Route::resource('items', App\Http\Controllers\Admin\MLBB\ItemController::class);
     Route::resource('emblems', App\Http\Controllers\Admin\MLBB\EmblemController::class);
@@ -70,7 +70,7 @@ Route::prefix('admin/mlbb')->name('admin.mlbb.')->group(function () {
     // Route::get('patch-note', [App\Http\Controllers\Admin\MLBB\HeroDetailController::class, 'index'])->name('heroes.detail'); 
 });
 
-Route::prefix('admin/mlbb/hero')->name('admin.mlbb.hero.')->group(function () {
+Route::prefix('admin/mlbb/hero')->middleware(['auth', 'admin'])->name('admin.mlbb.hero.')->group(function () {
     // Route::resource('item-counters', App\Http\Controllers\Admin\MLBB\HeroItemCounterController::class);
     // Route::resource('item-builds', App\Http\Controllers\Admin\MLBB\ItemBuildController::class);
     // // Route::resource('weaknesses', App\Http\Controllers\Admin\MLBB\HeroWeaknessController::class);
