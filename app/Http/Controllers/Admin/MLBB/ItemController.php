@@ -15,10 +15,10 @@ class ItemController extends Controller
         $selected_type = $request->input('item_type_id');
         if ($selected_type) {
             
-            $items = Item::where('item_type_id', $selected_type)->paginate(10);
+            $items = Item::where('item_type_id', $selected_type)->orderBy('id','desc')->paginate(10);
         }
         else{
-            $items = Item::paginate(10);
+            $items = Item::orderBy('id','desc')->paginate(10);
         }
 
         

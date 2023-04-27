@@ -21,10 +21,10 @@ class HeroController extends Controller
         $roles = Role::all();
         $selected_role = $request->input('role_id');
         if ($selected_role) {
-            $heroes = Hero::where('role_id', $selected_role)->paginate(10);
+            $heroes = Hero::where('role_id', $selected_role)->orderBy('id','desc')->paginate(10);
         }
         else{
-            $heroes = Hero::orderBy('name')->paginate(10); // 10 is the number of items per page, you can change it as needed
+            $heroes = Hero::orderBy('id', 'desc')->paginate(10); // 10 is the number of items per page, you can change it as needed
         }
         
         return view('admin.mlbb.heroes.index', compact('heroes', 'roles', 'selected_role'));
