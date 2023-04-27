@@ -64,6 +64,7 @@ Route::prefix('admin/mlbb')->name('admin.mlbb.')->group(function () {
     Route::post('heroes/{id}/build', [App\Http\Controllers\Admin\MLBB\HeroBuildController::class, 'store'])->name('heroes.build.store'); 
     Route::post('heroes/{id}/build-update', [App\Http\Controllers\Admin\MLBB\HeroBuildController::class, 'update'])->name('heroes.build.update');
     Route::get('heroes/{id}/detail', [App\Http\Controllers\Admin\MLBB\HeroDetailController::class, 'index'])->name('heroes.detail'); 
+    // Route::get('patch-note', [App\Http\Controllers\Admin\MLBB\HeroDetailController::class, 'index'])->name('heroes.detail'); 
 });
 
 Route::prefix('admin/mlbb/hero')->name('admin.mlbb.hero.')->group(function () {

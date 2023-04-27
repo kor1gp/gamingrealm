@@ -18,7 +18,7 @@
                         <a href="{{ route('admin.mlbb.items.index') }}" class="list-group-item list-group-item-action">Manage Items</a>                        
                     </div>
                     <div class="list-group mt-3">
-                        <a href="{{ route('admin.mlbb.items.index') }}" class="list-group-item list-group-item-action">Manage Emblems</a>                        
+                        <a href="{{ route('admin.mlbb.emblems.index') }}" class="list-group-item list-group-item-action">Manage Emblems</a>                        
                     </div>
                 </div>
             </div>
